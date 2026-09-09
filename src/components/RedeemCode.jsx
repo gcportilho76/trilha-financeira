@@ -25,7 +25,7 @@ export default function RedeemCode({ compact = false }) {
 
     if (error) {
       setStatus('error');
-      setMessage('Não foi possível resgatar agora. Tente novamente.');
+      setMessage(`Erro Supabase: ${error.message}`);
       return;
     }
 
