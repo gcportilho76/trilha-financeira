@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { supabase } from './lib/supabaseClient';
 import { useAuth } from './context/AuthContext';
 import PaywallGate from './components/PaywallGate';
-import { Lock, CheckCircle2, Wallet, TrendingUp, Shield, ChevronRight, ChevronLeft, Plus, X, Ghost, Home, Sparkles, Coins, Compass, Wind, Anchor, HeartHandshake, Users, PiggyBank, Snowflake, Mountain, Calendar, AlertTriangle, FileText, Copy, Clock, Activity, ClipboardCheck, Layers, Repeat, ShieldCheck, Target, ListOrdered, Landmark, LogOut } from 'lucide-react';
+import { Lock, CheckCircle2, Wallet, TrendingUp, Shield, ChevronRight, ChevronLeft, Plus, X, Ghost, Home, Sparkles, Coins, Compass, Wind, Anchor, HeartHandshake, Users, PiggyBank, Snowflake, Mountain, Calendar, AlertTriangle, FileText, Copy, Clock, Activity, ClipboardCheck, Layers, Repeat, ShieldCheck, Target, ListOrdered, Landmark, LogOut, ExternalLink } from 'lucide-react';
+import { CHECKOUT_LINKS } from './lib/checkoutLinks';
 
 const TOKENS = {
   bg: '#F5F3EC',
@@ -610,6 +611,20 @@ function DebtCompare({ debts, setDebts }) {
                 </div>
               );
             })}
+          </div>
+
+          <div style={{
+            marginTop: 20, paddingTop: 20, borderTop: `1px dashed ${TOKENS.line}`, textAlign: 'center',
+          }}>
+            <p style={{ fontSize: 13, color: TOKENS.inkSoft, margin: '0 0 12px', lineHeight: 1.5 }}>
+              Você chegou ao fim do Volume 1. O próximo passo é aprender a <strong style={{ color: TOKENS.ink }}>negociar essas dívidas com confiança</strong> — é exatamente isso que o Volume 2 ensina.
+            </p>
+            <a href={CHECKOUT_LINKS.vol2_access} target="_blank" rel="noreferrer" style={{
+              display: 'inline-flex', alignItems: 'center', gap: 8, padding: '12px 20px', borderRadius: 8,
+              background: TOKENS.primary, color: '#fff', fontWeight: 600, fontSize: 14, textDecoration: 'none',
+            }}>
+              Comprar Volume 2 — Quitação de Dívidas <ExternalLink size={15} />
+            </a>
           </div>
         </>
       )}
