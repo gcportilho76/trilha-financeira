@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { supabase } from './lib/supabaseClient';
+import { useAuth } from './context/AuthContext';
 import PaywallGate from './components/PaywallGate';
-import { Lock, CheckCircle2, Wallet, TrendingUp, Shield, ChevronRight, ChevronLeft, Plus, X, Ghost, Home, Sparkles, Coins, Compass, Wind, Anchor, HeartHandshake, Users, PiggyBank, Snowflake, Mountain, Calendar, AlertTriangle, FileText, Copy, Clock, Activity, ClipboardCheck, Layers, Repeat, ShieldCheck, Target, ListOrdered, Landmark } from 'lucide-react';
+import { Lock, CheckCircle2, Wallet, TrendingUp, Shield, ChevronRight, ChevronLeft, Plus, X, Ghost, Home, Sparkles, Coins, Compass, Wind, Anchor, HeartHandshake, Users, PiggyBank, Snowflake, Mountain, Calendar, AlertTriangle, FileText, Copy, Clock, Activity, ClipboardCheck, Layers, Repeat, ShieldCheck, Target, ListOrdered, Landmark, LogOut } from 'lucide-react';
 
 const TOKENS = {
   bg: '#F5F3EC',
@@ -1239,6 +1240,7 @@ function SuccessionChecklist({ state, setState }) {
 }
 
 export default function TrilhaFinanceira({ profile }) {
+  const { signOut } = useAuth();
   const userId = profile?.id;
   const [view, setView] = useState('home');
   const [answers, setAnswers, l1] = useStored(userId, 'mind-test-answers', {});
@@ -1315,9 +1317,22 @@ export default function TrilhaFinanceira({ profile }) {
       <style>{`@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap');`}</style>
 
       <div style={{ maxWidth: 480, margin: '0 auto' }}>
-        <header style={{ marginBottom: 22 }}>
-          <p style={{ fontSize: 11, letterSpacing: 1.5, textTransform: 'uppercase', color: TOKENS.gold, fontWeight: 700, margin: '0 0 4px' }}>Sua trilha financeira</p>
-          <h1 style={{ fontFamily: "'Fraunces', Georgia, serif", fontSize: 26, margin: 0, color: TOKENS.primary }}>{info.title}</h1>
+        <header style={{ marginBottom: 22, display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+          <div>
+            <p style={{ fontSize: 11, letterSpacing: 1.5, textTransform: 'uppercase', color: TOKENS.gold, fontWeight: 700, margin: '0 0 4px' }}>Sua trilha financeira</p>
+            <h1 style={{ fontFamily: "'Fraunces', Georgia, serif", fontSize: 26, margin: 0, color: TOKENS.primary }}>{info.title}</h1>
+          </div>
+          <button
+            onClick={signOut}
+            title="Sair"
+            style={{
+              display: 'flex', alignItems: 'center', gap: 6, background: TOKENS.card,
+              border: `1px solid ${TOKENS.line}`, borderRadius: 8, padding: '8px 12px',
+              color: TOKENS.inkSoft, fontSize: 12.5, fontWeight: 600, cursor: 'pointer', flexShrink: 0,
+            }}
+          >
+            <LogOut size={14} /> Sair
+          </button>
         </header>
 
         <div style={{ display: 'flex', marginBottom: 24, position: 'relative' }}>
